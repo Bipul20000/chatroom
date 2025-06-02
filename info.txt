@@ -1,0 +1,2 @@
+sudo mongod --dbpath=/Users/bipulkumar/data/db
+
