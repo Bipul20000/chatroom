@@ -1,2 +1,27 @@
+//start mongodb locally
 sudo mongod --dbpath=/Users/bipulkumar/data/db
 
+//string for mongodb atlas
+mongodb+srv://bipuldtu:bipuldtu@bipul.a6qb1zy.mongodb.net/bipul-dtu
+
+
+production
+
+server
+
+/*  MONGODB_URI=ongodb+srv://bipuldtu:bipuldtu@bipul.a6qb1zy.mongodb.net/bipul-dtu
+NODE_ENV=development  */
+
+client 
+
+/*  REACT_APP_SOCKET_SERVER=https://chatroom-bbv1.onrender.com  */
+
+
+
+
+
+git status
+
+git add .
+git commit -m "Resolve merge conflicts"
+git push origin main

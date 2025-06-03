@@ -13,14 +13,30 @@ const app = express();
 const server = http.createServer(app);
 
 // Configure CORS for Socket.io
+// friendly for both local and deployed environments
+// Allow specific origins to connect to the Socket.io server
+// This is important for security and to prevent unauthorized access
+// Define allowed origins for CORS
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://chatroom-20-eu2a35zyg-bipuldtu-gmailcoms-projects.vercel.app"
+];
+
 const io = socketIo(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' 
-      ? "https://chatroom-20-eu2a35zyg-bipuldtu-gmailcoms-projects.vercel.app" 
-      : "http://localhost:3000",
-    methods: ["GET", "POST"]
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: ${origin}`));
+      }
+    },
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
+
 
 // Middleware
 app.use(cors());
@@ -28,6 +44,11 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/chatapp')
+//here mongodb_uri is the connection string for your MongoDB database
+// Ensure to set the MONGODB_URI environment variable in production
+// Use the unified topology option for better connection management
+// both deployed and local
+
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -176,7 +197,7 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
