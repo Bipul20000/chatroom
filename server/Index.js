@@ -16,7 +16,7 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? "https://your-frontend-url.com" 
+      ? "https://chatroom-20-eu2a35zyg-bipuldtu-gmailcoms-projects.vercel.app" 
       : "http://localhost:3000",
     methods: ["GET", "POST"]
   }
