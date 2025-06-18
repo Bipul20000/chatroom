@@ -159,5 +159,5 @@ git push origin feature/your-feature-name
 
 ### 📄 License
 
-This project is licensed under the MIT License.  
+This project is licensed under the BIPUL License.  
 See `LICENSE` for more information.
